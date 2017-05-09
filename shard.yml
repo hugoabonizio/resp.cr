@@ -1,0 +1,14 @@
+name: RESP
+version: 0.1.0
+
+authors:
+  - Hugo Abonizio <hugo_abonizio@hotmail.com>
+
+crystal: 0.22.0
+
+development_dependencies:
+  resp:
+    github: soveran/resp-crystal
+    branch: master
+
+license: MIT
