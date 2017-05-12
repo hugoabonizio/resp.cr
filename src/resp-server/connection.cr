@@ -2,8 +2,12 @@ module RESP
   class Connection
     CRLF = "\r\n"
 
+    getter socket
+
     def initialize(@socket : IO)
     end
+
+    forward_missing_to @socket
 
     def parse
       first = @socket.gets(1)
@@ -16,6 +20,7 @@ module RESP
           arguments = array[1..-1]
         end
       end
+      @socket.gets(CRLF, {chomp: true})
       [operation, arguments]
     end
 

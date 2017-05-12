@@ -1,4 +1,4 @@
 require "spec"
-require "../src/resp"
+require "../src/resp-server"
 
 CRLF = "\r\n"
