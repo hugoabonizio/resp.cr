@@ -1,6 +1,7 @@
 module RESP
   class Connection
-    CRLF = "\r\n"
+    # CRLF = "\r\n"
+    CRLF = "\n"
 
     getter socket
 
@@ -20,7 +21,7 @@ module RESP
           arguments = array[1..-1]
         end
       end
-      @socket.gets(CRLF, {chomp: true})
+      # @socket.gets(CRLF, {chomp: true})
       [operation, arguments]
     end
 
