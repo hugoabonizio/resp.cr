@@ -11,22 +11,21 @@ module RESP
     forward_missing_to @socket
 
     def parse
-      first = @socket.gets(1)
+      first = @socket.read_char
       operation = nil
       arguments = Array(String).new
-      if first == "*"
+      if first == '*'
         array = parse_array
         if array.size > 0
           operation = array[0]
           arguments = array[1..-1]
         end
       end
-      # @socket.gets(CRLF, {chomp: true})
       [operation, arguments]
     end
 
     def parse_array
-      size = @socket.gets(LF, {chomp: true})
+      size = @socket.gets
       array = Array(String).new
       if size
         size.to_i.times do |i|
@@ -38,10 +37,10 @@ module RESP
     end
 
     def parse_bulk_string
-      size = @socket.gets(LF, {chomp: true})
+      size = @socket.gets
       string = ""
       if size && size[0] == '$'
-        string = @socket.gets(LF, {chomp: true})
+        string = @socket.gets
       end
       string
     end
