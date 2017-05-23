@@ -1,7 +1,7 @@
 module RESP
   class Connection
-    # CRLF = "\r\n"
-    CRLF = "\n"
+    CRLF = "\r\n"
+    LF   = "\n"
 
     getter socket
 
@@ -26,7 +26,7 @@ module RESP
     end
 
     def parse_array
-      size = @socket.gets(CRLF, {chomp: true})
+      size = @socket.gets(LF, {chomp: true})
       array = Array(String).new
       if size
         size.to_i.times do |i|
@@ -38,10 +38,10 @@ module RESP
     end
 
     def parse_bulk_string
-      size = @socket.gets(CRLF, {chomp: true})
+      size = @socket.gets(LF, {chomp: true})
       string = ""
       if size && size[0] == '$'
-        string = @socket.gets(CRLF, {chomp: true})
+        string = @socket.gets(LF, {chomp: true})
       end
       string
     end
