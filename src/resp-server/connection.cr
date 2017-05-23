@@ -14,6 +14,9 @@ module RESP
       first = @socket.read_char
       operation = nil
       arguments = Array(String).new
+
+      return [nil, arguments] if first.nil?
+
       if first == '*'
         array = parse_array
         if array.size > 0
@@ -21,6 +24,7 @@ module RESP
           arguments = array[1..-1]
         end
       end
+      @socket.skip(2)
       [operation, arguments]
     end
 
