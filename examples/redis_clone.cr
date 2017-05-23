@@ -1,4 +1,4 @@
-require "../src/resp"
+require "../resp-server"
 
 server = RESP::Server.new
 memory = {} of String => String
